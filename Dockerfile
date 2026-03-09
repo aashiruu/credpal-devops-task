@@ -8,7 +8,7 @@ RUN npm install --only=production
 FROM node:18-alpine
 WORKDIR /app
 
-# Install curl AND create user in one step to keep layers clean
+# Install curl AND create user in ONE clean layer
 RUN apk add --no-cache curl && \
     addgroup -S nodegroup && adduser -S nodeuser -G nodegroup
 

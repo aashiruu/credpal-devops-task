@@ -51,17 +51,17 @@ curl -X POST http://localhost:3000/process -H "Content-Type: application/json" -
 ### Infrastructure Provisioning
 The infrastructure is defined using Terraform in the ``` /terraform ``` directory.
 
-Navigate to the folder: ``` cd terraform ```
-Initialize : ``` terraform init ```
-Plan/Apply : ``` terraform apply ```
+- Navigate to the folder: ``` cd terraform ```
+- Initialize : ``` terraform init ```
+- Plan/Apply : ``` terraform apply ```
 This provisions a VPC, Security Groups, an Application Load Balancer, and an EC2 instance.
 
 ### Deployment Flow
 The application follows a Rolling Deployment strategy to ensure Zero-Downtime:
 
-**Build** : GitHub Actions builds a new Docker image on every push to ``` main ```.
-**Push** : The image is pushed to the container registry.
-**Update** : The deployment script (or orchestrator) triggers a rolling update, replacing old containers with new ones only after they pass the defined health checks.
+- **Build** : GitHub Actions builds a new Docker image on every push to ``` main ```.
+- **Push** : The image is pushed to the container registry.
+- **Update** : The deployment script (or orchestrator) triggers a rolling update, replacing old containers with new ones only after they pass the defined health checks.
 
 ## Key Technical Decisions
 ### Security

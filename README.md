@@ -82,7 +82,7 @@ The application follows a Rolling Deployment strategy to ensure Zero-Downtime:
 
 <img width="745" height="1239" alt="mermaid-diagram-2026-03-09-222630" src="https://github.com/user-attachments/assets/8e1822d5-aed4-4679-95a9-08627249e978" />
 
-## Future Improvements
+## Possible Improvements
 - Implement **Prometheus/Grafana** for deeper observability.
 - Transition to **Kubernetes (EKS)** for advanced orchestration.
 - Add a Manual Approval gate in **GitHub Actions** for production deployments.

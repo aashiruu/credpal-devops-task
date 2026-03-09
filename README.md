@@ -26,23 +26,24 @@ This will start the Node.js application on port 3000 and a PostgreSQL database i
 ## How to Access the App
 The application exposes three main endpoints. You can access them via your browser or terminal:
 ```
-Endpoint,Method,Description
-http://localhost:3000/health,GET,Returns application health status
-http://localhost:3000/status,GET,Returns readiness and environment info
-http://localhost:3000/process,POST,Simulates data processing
+| Endpoint | Method | Description |
+| :--- | :---: | ---: |
+| http://localhost:3000/health | GET | Returns application health status |
+| http://localhost:3000/status | GET | Returns readiness and environment info |
+| http://localhost:3000/process | POST | Simulates data processing |
 ```
 
 Quick Test Commands:
 
-# Health check
+### Health check
 ```
 curl http://localhost:3000/health
 ```
-# Status check
+### Status check
 ```
 curl http://localhost:3000/status
 ```
-# Process data
+### Process data
 ```
 curl -X POST http://localhost:3000/process -H "Content-Type: application/json" -d '{"data":"test"}'
 ```

@@ -65,24 +65,24 @@ The application follows a Rolling Deployment strategy to ensure Zero-Downtime:
 
 ## Key Technical Decisions
 ### Security
-**Non-Root Execution**: The Dockerfile creates and switches to ```nodeuser```. The application never runs with root privileges, significantly reducing the risk of container breakout.
-**Minimal Surface Area**: Used ```node:18-alpine``` as the base image to minimize vulnerabilities and optimize build speed.
-**Secrets Management**: Environment variables are used in ```docker-compose.yml``` to decouple configuration from code.
-**HTTPS**: The Terraform configuration includes a Load Balancer setup designed to terminate SSL/TLS certificates
+- **Non-Root Execution**: The Dockerfile creates and switches to ```nodeuser```. The application never runs with root privileges, significantly reducing the risk of container breakout.
+- **Minimal Surface Area**: Used ```node:18-alpine``` as the base image to minimize vulnerabilities and optimize build speed.
+- **Secrets Management**: Environment variables are used in ```docker-compose.yml``` to decouple configuration from code.
+- **HTTPS**: The Terraform configuration includes a Load Balancer setup designed to terminate SSL/TLS certificates
 
 ### CI/CD (GitHub Actions)
-**Automated Validation**: The pipeline (found in ``` .github/workflows/main.yml ``` ) automates the environment setup, dependency installation, and Docker build.
-**Build Consistency**: By performing the build in the CI environment, we ensure that the image is identical across development, staging, and production.
+- **Automated Validation**: The pipeline (found in ``` .github/workflows/main.yml ``` ) automates the environment setup, dependency installation, and Docker build.
+- **Build Consistency**: By performing the build in the CI environment, we ensure that the image is identical across development, staging, and production.
 
 ### Infrastructure
-**VPC Isolation**: Implemented a Virtual Private Cloud with specific ingress rules, ensuring that only necessary ports (3000, 80, 443) are exposed to the public internet.
-**Health Monitoring**: Integrated Docker ``` HEALTHCHECK ``` within the container to allow the load balancer to automatically drain traffic from unhealthy instances.
+- **VPC Isolation**: Implemented a Virtual Private Cloud with specific ingress rules, ensuring that only necessary ports (3000, 80, 443) are exposed to the public internet.
+- **Health Monitoring**: Integrated Docker ``` HEALTHCHECK ``` within the container to allow the load balancer to automatically drain traffic from unhealthy instances.
 
 ## Architecture Diagram
 
 <img width="745" height="1239" alt="mermaid-diagram-2026-03-09-222630" src="https://github.com/user-attachments/assets/8e1822d5-aed4-4679-95a9-08627249e978" />
 
 ## Future Improvements
-Implement **Prometheus/Grafana** for deeper observability.
-Transition to **Kubernetes (EKS)** for advanced orchestration.
-Add a Manual Approval gate in **GitHub Actions** for production deployments.
+- Implement **Prometheus/Grafana** for deeper observability.
+- Transition to **Kubernetes (EKS)** for advanced orchestration.
+- Add a Manual Approval gate in **GitHub Actions** for production deployments.

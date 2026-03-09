@@ -3,6 +3,10 @@ services:
     build: .
     ports:
       - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=password
     depends_on:
       - db
   db:

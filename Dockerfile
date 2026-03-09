@@ -7,10 +7,18 @@ RUN npm install --only=production
 # Stage 2: Final Image
 FROM node:18-alpine
 WORKDIR /app
-# Best Practice: Non-root user
-RUN addgroup -S nodegroup && adduser -S nodeuser -G nodegroup
+
+# Install curl AND create user in one step to keep layers clean
+RUN apk add --no-cache curl && \
+    addgroup -S nodegroup && adduser -S nodeuser -G nodegroup
+
 COPY --from=builder /app/node_modules ./node_modules
 COPY . .
+
 USER nodeuser
+
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost:3000/health || exit 1
+
 EXPOSE 3000
 CMD ["node", "app.js"]
